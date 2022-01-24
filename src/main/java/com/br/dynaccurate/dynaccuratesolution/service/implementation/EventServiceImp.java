@@ -20,10 +20,10 @@ public class EventServiceImp implements EventService {
     }
 
     @Override
-    public Page<Event> findEventByUser(String idUser, LocalDateTime toDate, LocalDateTime fromDate, Pageable pageable) {
+    public Page<Event> findEventByUser(String nicknameUser, LocalDateTime toDate, LocalDateTime fromDate, Pageable pageable) {
         toDate = toDate == null ? LocalDateTime.now(): toDate;
         fromDate = fromDate == null ? LocalDateTime.now(): fromDate;
 
-        return repository.findEventByUser(idUser, toDate, fromDate, pageable);
+        return repository.findEventByUser(nicknameUser, toDate, fromDate, pageable);
     }
 }

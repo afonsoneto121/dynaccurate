@@ -9,5 +9,5 @@ import java.time.LocalDateTime;
 public interface EventService {
     Event save(Event event);
 
-    Page<Event> findEventByUser(String idUser, LocalDateTime toDate, LocalDateTime fromDate, Pageable pageable);
+    Page<Event> findEventByUser(String nicknameUser, LocalDateTime toDate, LocalDateTime fromDate, Pageable pageable);
 }

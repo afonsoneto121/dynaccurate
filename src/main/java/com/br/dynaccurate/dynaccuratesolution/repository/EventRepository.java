@@ -11,6 +11,6 @@ import java.time.LocalDateTime;
 
 @Repository
 public interface EventRepository extends MongoRepository<Event, String> {
-    @Query(" {'nickname' : ?0, 'date' : '$and' : [{$gte: ?2},{$lte: ?1}] }")
-    Page<Event> findEventByUser(String idUser, LocalDateTime toDate, LocalDateTime fromDate, Pageable pageable);
+    @Query(" {'nicknameUser' : ?0, 'dateTime' : '$and' : [{$gte: ?2},{$lte: ?1}] }")
+    Page<Event> findEventByUser(String nicknameUser, LocalDateTime toDate, LocalDateTime fromDate, Pageable pageable);
 }

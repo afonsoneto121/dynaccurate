@@ -20,5 +20,5 @@ public class Event {
     private String id;
     private String type;
     private LocalDateTime dateTime;
-    String idUser;
+    String nicknameUser;
 }

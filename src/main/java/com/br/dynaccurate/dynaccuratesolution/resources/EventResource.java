@@ -19,12 +19,12 @@ import java.time.LocalDateTime;
 public class EventResource {
     private final EventService service;
 
-    @GetMapping("/user/{idUser}")
-    public ResponseEntity<Page<Event>> getAllEvents(@PathVariable String idUser,
+    @GetMapping("/user/{nicknameUser}")
+    public ResponseEntity<Page<Event>> getAllEvents(@PathVariable String nicknameUser,
                                                     @RequestParam LocalDateTime toDate,
                                                     @RequestParam LocalDateTime fromDate,
                                                     Pageable pageable) {
-        Page<Event> allEvent = service.findEventByUser(idUser,toDate,fromDate, pageable);
+        Page<Event> allEvent = service.findEventByUser(nicknameUser,toDate,fromDate, pageable);
         return ResponseEntity.ok(allEvent);
     }
 }
