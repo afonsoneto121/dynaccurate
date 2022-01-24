@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
@@ -21,8 +22,8 @@ public class EventResource {
 
     @GetMapping("/user/{nicknameUser}")
     public ResponseEntity<Page<Event>> getAllEvents(@PathVariable String nicknameUser,
-                                                    @RequestParam LocalDateTime toDate,
-                                                    @RequestParam LocalDateTime fromDate,
+                                                    @RequestParam(required = false, name = "toDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime toDate,
+                                                    @RequestParam(required = false, name = "fromDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fromDate,
                                                     Pageable pageable) {
         Page<Event> allEvent = service.findEventByUser(nicknameUser,toDate,fromDate, pageable);
         return ResponseEntity.ok(allEvent);
