@@ -4,7 +4,7 @@
 
 The description of the project is available [here]()
 
-The project is a web service that it manage users (CRUD function) and it consumes events from a queue RabbitMQ. The second part of the project, which produces events to a queue RabbitMQ, is [here](https://github.com/afonsoneto121/dynaccurate-worker). 
+The project is a web service that manages users (CRUD function), it consumes events from a queue RabbitMQ and saved them in the database The second part of the project, which produces events to a queue RabbitMQ, is [here](https://github.com/afonsoneto121/dynaccurate-worker). 
 
 
 
