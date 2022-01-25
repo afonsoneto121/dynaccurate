@@ -1,10 +1,13 @@
 package com.br.dynaccurate.dynaccuratesolution.util;
 
 import com.br.dynaccurate.dynaccuratesolution.dto.request.UserDTORequest;
+import com.br.dynaccurate.dynaccuratesolution.dto.response.EventDTOResponse;
 import com.br.dynaccurate.dynaccuratesolution.dto.response.UserDTOResponse;
+import com.br.dynaccurate.dynaccuratesolution.model.Event;
 import com.br.dynaccurate.dynaccuratesolution.model.User;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class GenerateObjects {
     public static User getUser() {
@@ -26,5 +29,21 @@ public class GenerateObjects {
                 .nickname("Afonso")
                 .build();
     }
+    public static Event getEvent() {
+        return Event.builder()
+                .id("2")
+                .nicknameUser("Afonso")
+                .type("event 1")
+                .dateTime(LocalDateTime.now())
+                .build();
+    }
 
+    public static EventDTOResponse getEventDTOResponse() {
+        return EventDTOResponse.builder()
+                .id("2")
+                .nicknameUser("Afonso")
+                .type("event 1")
+                .dateTime(LocalDateTime.now())
+                .build();
+    }
 }
