@@ -62,6 +62,18 @@ services:
     networks:
       - network-app
 
+  app-worker:
+    image: afonsobsneto/dynaccurate-worker
+    container_name: app_worker_dynaccurate
+    ports:
+      - 8086:8086
+    environment:
+      RABBIT_HOST: rabbit_dynaccurate
+    depends_on:
+      - mongo
+      - rabbit-mq
+    networks:
+      - network-app
 networks:
   network-app:
     driver: bridge
