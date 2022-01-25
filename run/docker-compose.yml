@@ -1,0 +1,67 @@
+version: "3.8"
+
+services:
+  mongo:
+    image: mongo
+    container_name: db_mongo_dynaccurate
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    ports:
+      - "27017:27017"
+    volumes:
+      - ${HOME}/.volumes/solution/MongoDB/data:/data/db
+    networks:
+      - network-app
+
+  mongo-express:
+    image: mongo-express
+    container_name: express_dynaccurate
+    ports:
+      - 8082:8081
+    environment:
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: admin
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: root
+      ME_CONFIG_MONGODB_SERVER: db_mongo_dynaccurate
+      ME_CONFIG_OPTIONS_EDITORTHEME: "ambiance"
+    links:
+      - mongo
+    depends_on:
+      - mongo
+    networks:
+      - network-app
+
+  rabbit-mq:
+    image: rabbitmq:3-management
+    container_name: rabbit_dynaccurate
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ../producer:/producer
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
+    networks:
+      - network-app
+
+  app:
+    image: afonsobsneto/dynaccurate
+    container_name: app_dynaccurate
+    ports:
+      - 8085:8085
+    environment:
+      DB_HOST: db_mongo_dynaccurate
+      RABBIT_HOST: rabbit_dynaccurate
+    depends_on:
+      - mongo
+      - rabbit-mq
+    networks:
+      - network-app
+
+networks:
+  network-app:
+    driver: bridge
