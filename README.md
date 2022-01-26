@@ -36,6 +36,7 @@ git clone https://github.com/afonsoneto121/dynaccurate
 #### Step 2
 
 ```sh
+cd dynaccurate && \
 cd run && \
 docker-compose up --build -d && \
 cd ..
